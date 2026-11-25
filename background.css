@@ -1,0 +1,74 @@
+/*
+  인간과 기계, 그리고 가능성 — 우주 배경 스타일
+  배경 사진을 바꾸려면 같은 저장소 위치의 space-background.jpg 파일만 교체하세요.
+  파일명과 확장자는 그대로 유지하면 index.html을 다시 수정할 필요가 없습니다.
+*/
+
+:root {
+  --site-space-background: url("./space-background.jpg?v=1");
+  --site-background-shade: rgba(5, 12, 25, 0.70);
+}
+
+/* 전체 페이지 뒤에 고정된 우주 배경 */
+html {
+  min-height: 100%;
+  background: #07101d;
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  background: transparent !important;
+  color: var(--text, #e8eae4);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      var(--site-background-shade),
+      var(--site-background-shade)
+    ),
+    var(--site-space-background);
+  background-position: center center, center center;
+  background-size: cover, cover;
+  background-repeat: no-repeat, no-repeat;
+}
+
+/* 화면 위 UI는 반투명 유리 패널처럼 유지 */
+.sidebar {
+  background: rgba(10, 20, 36, 0.84) !important;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.topbar {
+  background: rgba(8, 16, 30, 0.64) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.metric,
+.tile,
+.entry,
+.formpanel,
+.readpanel,
+.settings article {
+  background-color: rgba(15, 28, 46, 0.82) !important;
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+}
+
+/* 모바일에서는 배경 고정 렌더링 호환성을 우선 */
+@media (max-width: 650px) {
+  body::before {
+    position: absolute;
+    min-height: 100%;
+    background-attachment: scroll;
+  }
+}
